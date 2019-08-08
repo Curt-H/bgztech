@@ -5,4 +5,10 @@ from django.shortcuts import render
 # Create your views here.
 
 def index(request):
-    return HttpResponse('index')
+    context_dict = {
+        'arg': '123',
+    }
+    return render(request,
+                  'blog/index.html',
+                  context=context_dict
+                  )
