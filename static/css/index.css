@@ -1,0 +1,17 @@
+body {
+    background-color: black;
+    font-family: sans-serif;
+}
+
+div {
+    text-align: center;
+}
+
+img {
+    width: 50%;
+}
+
+h1, h2 {
+    text-align: center;
+    color: white;
+}

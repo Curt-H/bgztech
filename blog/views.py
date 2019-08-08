@@ -6,7 +6,6 @@ from django.shortcuts import render
 
 def index(request):
     context_dict = {
-        'arg': '123',
     }
     return render(request,
                   'blog/index.html',
