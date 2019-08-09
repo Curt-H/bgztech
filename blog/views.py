@@ -42,7 +42,7 @@ def sign_up_view(request):
                   )
 
 
-def test_post(request):
+def create_new_user(request):
     context_dict = {
     }
 
@@ -72,3 +72,12 @@ def test_post(request):
         u = Users(username=username, password=password)
         u.save()
         return HttpResponseRedirect(reverse('homepage'))
+
+
+def sign_in(request):
+    context_dict = {
+    }
+    return render(request,
+                  'blog/sign_in.html',
+                  context=context_dict,
+                  )
