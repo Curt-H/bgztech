@@ -81,3 +81,13 @@ def sign_in(request):
                   'blog/sign_in.html',
                   context=context_dict,
                   )
+
+
+def sign_in_check(request):
+    context_dict = {
+    }
+    
+    return render(request,
+                  'blog/sign_in.html',
+                  context=context_dict,
+                  )
