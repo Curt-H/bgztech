@@ -1,9 +1,12 @@
 from django.contrib.auth.password_validation import validate_password
 from django.core import exceptions
-from django.shortcuts import render
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect
 
 # Create your views here.
-from blog import validate_username
+from django.urls import reverse
+
+from blog import validate_username, Users
 
 
 def index(request):
@@ -15,10 +18,13 @@ def index(request):
                   )
 
 
-def homepage(request):
+def homepage(request, u=None):
     context_dict = {
+        'u': u,
     }
-
+    print(request.GET)
+    for k, y in request.GET.items():
+        print(k, y)
     return render(request,
                   'blog/homepage.html',
                   context=context_dict
@@ -60,8 +66,4 @@ def test_post(request):
                       context=context_dict
                       )
     else:
-        print(post)
-        print(post['password'])
-        return render(request,
-                      'blog/sign_up.html',
-                      )
+        return HttpResponseRedirect(reverse('homepage', kwargs={'u': username}))
