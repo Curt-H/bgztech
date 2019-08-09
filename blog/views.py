@@ -1,4 +1,4 @@
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth.password_validation import validate_password
 from django.core import exceptions
 from django.http import HttpResponseRedirect
@@ -23,7 +23,6 @@ def homepage(request, u=None):
     context_dict = {
         'u': u,
     }
-    print(request.GET)
     for k, y in request.GET.items():
         print(k, y)
     return render(request,
@@ -86,8 +85,25 @@ def sign_in(request):
 def sign_in_check(request):
     context_dict = {
     }
-    
-    return render(request,
-                  'blog/sign_in.html',
-                  context=context_dict,
-                  )
+    flag = False
+
+    post = request.POST
+    username = post['username']
+    password = post['password']
+
+    user = Users.objects(username=username).first()
+    if user is not None:
+        flag = check_password(password, user.password)
+
+    if not flag:
+        context_dict['error_msg'] = ['账号/密码错误']
+        return render(request,
+                      'blog/sign_in.html',
+                      context=context_dict,
+                      )
+    else:
+        context_dict['error_msg'] = ['登录成功']
+        return render(request,
+                      'blog/sign_in.html',
+                      context=context_dict,
+                      )
