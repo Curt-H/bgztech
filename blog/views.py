@@ -1,3 +1,4 @@
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.password_validation import validate_password
 from django.core import exceptions
 from django.http import HttpResponseRedirect
@@ -52,6 +53,7 @@ def test_post(request):
         'This password is entirely numeric.': '密码是纯数字'
     }
 
+    # get form data from POST
     post = request.POST
     username = post['username']
     password = post['password']
@@ -66,4 +68,7 @@ def test_post(request):
                       context=context_dict
                       )
     else:
-        return HttpResponseRedirect(reverse('homepage', kwargs={'u': username}))
+        password = make_password(password, 'bgztech')
+        u = Users(username=username, password=password)
+        u.save()
+        return HttpResponseRedirect(reverse('homepage'))
