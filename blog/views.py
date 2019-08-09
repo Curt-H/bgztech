@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from django.shortcuts import render
 
 
@@ -9,5 +8,15 @@ def index(request):
     }
     return render(request,
                   'blog/index.html',
+                  context=context_dict
+                  )
+
+
+def homepage(request):
+    context_dict = {
+    }
+
+    return render(request,
+                  'blog/homepage.html',
                   context=context_dict
                   )

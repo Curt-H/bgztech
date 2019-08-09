@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="ch">
+<head>
+    <meta charset="UTF-8">
+    <title>BGZ TECH</title>
+    <link rel="stylesheet" href="{% static "css/homepage.css" %}">
+</head>
+<body>
+
+<div class=".article">
+    <a href="{% url "index" %}">
+        <img src="{{ MEDIA_URL }}user.png" alt="User media">
+    </a>
+    <p>1. 将焊接好插针的线材从尾部插入SMA, 插针对准胶芯中心的插针孔, 如图1.</p>
+    <p>2. 手持导线, 垂直于胶芯面发力将插针与推管插入SMA, 装配中不可以旋转导线或推管, 推管需推入1/2以上, 如图2</p>
+    <p>3. 合格品流到下道工序。</p>
+</div>
+
+</body>
+</html>
