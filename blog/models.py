@@ -5,7 +5,7 @@ connect('bgztech')
 
 
 # mongo DB models below
-class dbUsers(Document):
+class Users(Document):
     username = StringField(required=True, unique=True)
     password = StringField(required=True)
     role = StringField(default='user')
