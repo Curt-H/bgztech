@@ -4,11 +4,11 @@ img {
 
 body {
     background-color: black;
+    color: white;
 }
 
-div {
+.main {
     background-color: #222;
-    text-align: center;
     margin: 0 5rem;
     padding: 5rem;
 }
@@ -17,4 +17,14 @@ p {
     color: white;
     text-align: left;
     font-family: "sans-serif";
+}
+
+.tips {
+    text-align: left;
+}
+
+.error {
+    background-color: yellow;
+    color: red;
+    font-weight: 800;
 }

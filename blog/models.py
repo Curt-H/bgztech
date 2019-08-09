@@ -1,22 +1,24 @@
+from django import forms
 from mongoengine import *
 
 connect('bgztech')
 
 
-# Create your models here.
-
-class Users(Document):
-    username = StringField(required=True)
+# mongo DB models below
+class dbUsers(Document):
+    username = StringField(required=True, unique=True)
     password = StringField(required=True)
     role = StringField(default='user')
 
 
 if __name__ == '__main__':
     class Test(Document):
-        username = StringField(required=True)
+        username = StringField(required=True, unique=True)
         password = StringField(required=True)
 
-    t = Test()
-    t.username = 'test'
-    t.password = 'test'
-    t.save()
+
+    for i in range(2):
+        t = Test()
+        t.username = 'test'
+        t.password = 'test'
+        t.save()
