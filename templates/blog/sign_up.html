@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="ch">
+<head>
+    <meta charset="UTF-8">
+    <title>BGZ TECH</title>
+    <link rel="stylesheet" href="{% static "css/homepage.css" %}">
+</head>
+<body>
+
+<div class=".article">
+    <form action="{% url "test post" %}" method="post">
+        <label>
+            <input type="text" name="username">
+        </label>
+        <label>
+            <input type="text" name="password">
+        </label>
+        <button type="submit">SUBMIT</button>
+        {% csrf_token %}
+    </form>
+</div>
+
+</body>
+</html>

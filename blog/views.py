@@ -20,3 +20,21 @@ def homepage(request):
                   'blog/homepage.html',
                   context=context_dict
                   )
+
+
+def sign_up_view(request):
+    context_dict = {
+    }
+
+    return render(request,
+                  'blog/sign_up.html',
+                  context=context_dict
+                  )
+
+
+def test_post(request):
+    post = {**request.POST}
+    print(post)
+    return render(request,
+                  'blog/sign_up.html',
+                  )

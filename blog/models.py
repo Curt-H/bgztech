@@ -16,7 +16,6 @@ if __name__ == '__main__':
         username = StringField(required=True)
         password = StringField(required=True)
 
-
     t = Test()
     t.username = 'test'
     t.password = 'test'
