@@ -1,5 +1,6 @@
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth.password_validation import validate_password
+from django.contrib.sessions.models import Session
 from django.core import exceptions
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -7,7 +8,7 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from django.urls import reverse
 
-from blog import validate_username, Users
+from blog import validate_username, Users, set_session
 
 
 def index(request):
@@ -25,7 +26,6 @@ def homepage(request, u=None):
     context_dict = {
         'u': u,
     }
-
     for k, y in request.GET.items():
         print(k, y)
     return render(request,
@@ -106,12 +106,7 @@ def sign_in_check(request):
                       context=context_dict,
                       )
     else:
-        context_dict['error_msg'] = ['登录成功']
 
-        response = render(request,
-                          'blog/sign_in.html',
-                          context=context_dict,
-                          )
-        response.set_cookie('username', username)
-
+        response = HttpResponseRedirect(reverse('homepage'))
+        set_session(response, user)
         return response

@@ -10,6 +10,11 @@ class Users(Document):
     role = StringField(default='user')
 
 
+class Session(Document):
+    session_id = UUIDField(required=True)
+    user = LazyReferenceField('Users')
+
+
 if __name__ == '__main__':
     class Test(Document):
         username = StringField(required=True, unique=True)
