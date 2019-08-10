@@ -8,7 +8,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.urls import reverse
 
-from blog import validate_username, Users, set_session, current_user, create_user
+from blog import validate_username, Users, set_session, current_user, create_user, find_user
 
 
 def index(request):
@@ -46,6 +46,7 @@ def create_new_user(request):
     }
 
     result = create_user(request)
+
     if not result['success']:
         context_dict['error_msg'] = result['error_msg']
         return render(request,
@@ -70,24 +71,15 @@ def sign_in(request):
 def sign_in_check(request):
     context_dict = {
     }
-    flag = False
 
-    post = request.POST
-    username = post['username']
-    password = post['password']
-
-    # find user and validate password
-    user = Users.objects(username=username).first()
-    if user is not None:
-        flag = check_password(password, user.password)
-
-    if not flag:
+    find, user = find_user(request)
+    if not find:
         context_dict['error_msg'] = ['账号/密码错误']
         return render(request,
                       'blog/sign_in.html',
                       context=context_dict,
                       )
     else:
-        response = HttpResponseRedirect(reverse('homepage') + '?' + 'a=1')
+        response = HttpResponseRedirect(reverse('homepage'))
         set_session(response, user)
         return response

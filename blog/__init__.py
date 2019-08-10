@@ -1,15 +1,15 @@
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth.password_validation import validate_password
 from django.core import exceptions
 
 from blog.models import Users, Session
 import uuid
-from django.db import models
 from django.core.exceptions import ValidationError
 
 
 def validate_username(username):
     u = username
+
     # query user from database
     users = Users.objects(username=u)
     print(users)
@@ -22,8 +22,8 @@ def validate_username(username):
 def set_session(response, user=None):
     namespace = uuid.NAMESPACE_DNS
 
+    # find session object, if found, update it, if not create new one
     s = Session.objects(user=user).first()
-    print(s)
     if s is None:
         s = Session()
         session_id = uuid.uuid3(namespace, user.username).hex
@@ -31,17 +31,16 @@ def set_session(response, user=None):
         s.user = user
         s.save()
 
-    response.set_cookie('session_id', s.session_id, max_age=3600)
-
-    return response
+    response.set_cookie('session_id', s.session_id, max_age=36000)
 
 
 def current_user(request):
-    for v in request.COOKIES:
-        print(v)
     session_id = request.COOKIES.get('session_id', None)
     print(session_id)
+
+    # if there is no session or expired return 'visivtor'
     if session_id is None:
+        print(Users.objects(role='visitor').first())
         return Users.objects(role='visitor').first()
     else:
         session = Session.objects(session_id=session_id).first()
@@ -80,5 +79,21 @@ def create_user(request):
     return result
 
 
+def find_user(request):
+    post = request.POST
+    username = post['username']
+    password = post['password']
+
+    user = Users.objects(username=username).first()
+
+    if user is None: return False, user
+
+    return check_password(password, user.password), user
+
+
 if __name__ == '__main__':
-    pass
+    u = Users()
+    u.username = '游客'
+    u.password = ''
+    u.role = 'visitor'
+    u.save()
