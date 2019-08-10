@@ -16,16 +16,18 @@ def validate_username(username):
 
 
 def set_session(response, user=None):
-    session_id = uuid.uuid1().hex
+    namespace = uuid.NAMESPACE_DNS
 
-    s = Session().objects(user=user)
-    s.session_id = session_id
-    s.user = user
-    s.save()
+    s = Session.objects(user=user).first()
+    if s is None:
+        s = Session()
+        session_id = uuid.uuid3(namespace, user.username).hex
+        s.session_id = session_id
+        s.user = user
+        s.save()
 
-    print(session_id)
-    response.set_cookie('session_id', s.session_id, max_age=3600)
+        response.set_cookie('session_id', s.session_id, max_age=3600)
 
 
 if __name__ == '__main__':
-    set_session('')
+    pass
