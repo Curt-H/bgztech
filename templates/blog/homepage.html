@@ -11,7 +11,7 @@
 <div class=".article">
 
     {% if u %}
-        <p>欢迎, {{ u }}</p>
+        <p>欢迎, {{ u.username }}</p>
     {% endif %}
 
     <img src="{{ MEDIA_URL }}user.png" alt="User media">
