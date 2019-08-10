@@ -20,9 +20,12 @@ def index(request):
 
 
 def homepage(request, u=None):
+    u = request.COOKIES.get('username', '')
+
     context_dict = {
         'u': u,
     }
+
     for k, y in request.GET.items():
         print(k, y)
     return render(request,
@@ -91,6 +94,7 @@ def sign_in_check(request):
     username = post['username']
     password = post['password']
 
+    # find user and validate password
     user = Users.objects(username=username).first()
     if user is not None:
         flag = check_password(password, user.password)
@@ -103,7 +107,11 @@ def sign_in_check(request):
                       )
     else:
         context_dict['error_msg'] = ['登录成功']
-        return render(request,
-                      'blog/sign_in.html',
-                      context=context_dict,
-                      )
+
+        response = render(request,
+                          'blog/sign_in.html',
+                          context=context_dict,
+                          )
+        response.set_cookie('username', username)
+
+        return response
