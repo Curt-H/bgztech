@@ -1,643 +1,268 @@
-# ![EpicEditor](http://epiceditor.com/docs/images/epiceditor-logo.png)
+# Editor.md
 
-## An Embeddable JavaScript Markdown Editor
+![](https://pandao.github.io/editor.md/images/logos/editormd-logo-180x180.png)
 
-EpicEditor is an embeddable JavaScript [Markdown](http://daringfireball.net/projects/markdown/) editor with split fullscreen editing, live previewing, automatic draft saving, offline support, and more. For developers, it offers a robust API, can be easily themed, and allows you to swap out the bundled Markdown parser with anything you throw at it.
+![](https://img.shields.io/github/stars/pandao/editor.md.svg)
+![](https://img.shields.io/github/forks/pandao/editor.md.svg)
+![](https://img.shields.io/github/tag/pandao/editor.md.svg)
+![](https://img.shields.io/github/release/pandao/editor.md.svg)
+![](https://img.shields.io/github/issues/pandao/editor.md.svg)
+![](https://img.shields.io/bower/v/editor.md.svg)
 
-## Why
+**Editor.md** : The open source embeddable online markdown editor (component), based on CodeMirror & jQuery & Marked.
 
-Because, WYSIWYGs suck. Markdown is quickly becoming the replacement. [GitHub](http://github.com), [Stackoverflow](http://stackoverflow.com), and even blogging apps like [Posterous](http://posterous.com) are now supporting Markdown. EpicEditor allows you to create a Markdown editor with a single line of JavaScript:
+### Features
 
-```javascript
-var editor = new EpicEditor().load();
-```
+- Support Standard Markdown / CommonMark and GFM (GitHub Flavored Markdown);
+- Full-featured: Real-time Preview, Image (cross-domain) upload, Preformatted text/Code blocks/Tables insert, Code fold, Search replace, Read only, Themes, Multi-languages, L18n, HTML entities, Code syntax highlighting...;
+- Markdown Extras : Support [ToC (Table of Contents)](https://pandao.github.io/editor.md/examples/toc.html), [Emoji](https://pandao.github.io/editor.md/examples/emoji.html), [Task lists](https://pandao.github.io/editor.md/examples/task-lists.html), [@Links](https://pandao.github.io/editor.md/examples/@links.html)...;
+- Compatible with all major browsers (IE8+), compatible Zepto.js and iPad;
+- Support [decode & fliter of the HTML tags & attributes](https://pandao.github.io/editor.md/examples/html-tags-decode.html);
+- Support [TeX (LaTeX expressions, Based on KaTeX)](https://pandao.github.io/editor.md/examples/katex.html), [Flowchart](https://pandao.github.io/editor.md/examples/flowchart.html) and [Sequence Diagram](https://pandao.github.io/editor.md/examples/sequence-diagram.html) of Markdown extended syntax;
+- Support AMD/CMD (Require.js & Sea.js) Module Loader, and Custom/define editor plugins;
 
-## Quick Start
+[README & Examples (English)](https://pandao.github.io/editor.md/en.html)
+  
 
-EpicEditor is easy to implement. Add the script and assets to your page, provide a target container and call `load()`.
+--------
 
-### Step 1: Download
+**Editor.md** 是一款开源的、可嵌入的 Markdown 在线编辑器（组件），基于 CodeMirror、jQuery 和 Marked 构建。
 
-[Download the latest release](http://epiceditor.com) or clone the repo:
+![editormd-screenshot](https://pandao.github.io/editor.md/examples/images/editormd-screenshot.png "editormd-screenshot")
+
+#### 主要特性
+
+- 支持通用 Markdown / CommonMark 和 GFM (GitHub Flavored Markdown) 风格的语法，也可[变身为代码编辑器](https://pandao.github.io/editor.md/examples/change-mode.html)；
+- 支持实时预览、图片（跨域）上传、预格式文本/代码/表格插入、代码折叠、跳转到行、搜索替换、只读模式、自定义样式主题和多语言语法高亮等功能；
+- 支持 [ToC（Table of Contents）](https://pandao.github.io/editor.md/examples/toc.html)、[Emoji表情](https://pandao.github.io/editor.md/examples/emoji.html)、[Task lists](https://pandao.github.io/editor.md/examples/task-lists.html)、[@链接](https://pandao.github.io/editor.md/examples/@links.html)等 Markdown 扩展语法；
+- 支持 TeX 科学公式（基于 [KaTeX](https://pandao.github.io/editor.md/examples/katex.html)）、流程图 [Flowchart](https://pandao.github.io/editor.md/examples/flowchart.html) 和 [时序图 Sequence Diagram](https://pandao.github.io/editor.md/examples/sequence-diagram.html);
+- 支持[识别和解析 HTML 标签，并且支持自定义过滤标签及属性解析](https://pandao.github.io/editor.md/examples/html-tags-decode.html)，具有可靠的安全性和几乎无限的扩展性；
+- 支持 AMD / CMD 模块化加载（支持 [Require.js](https://pandao.github.io/editor.md/examples/use-requirejs.html) & [Sea.js](https://pandao.github.io/editor.md/examples/use-seajs.html)），并且支持[自定义扩展插件](https://pandao.github.io/editor.md/examples/define-plugin.html)；
+- 兼容主流的浏览器（IE8+）和 [Zepto.js](https://pandao.github.io/editor.md/examples/use-zepto.html)，且支持 iPad 等平板设备；
+
+#### Download & install
+
+Download:
+
+[Github download](https://github.com/pandao/editor.md/archive/master.zip)
+
+NPM install :
 
 ```bash
-$ git clone git@github.com:OscarGodson/EpicEditor
+npm install editor.md
 ```
 
-### Step 2: Create your container element
+Bower install :
+
+```bash
+bower install editor.md
+```
+
+#### Usages
+
+##### Create a Markdown editor
 
 ```html
-<div id="epiceditor"></div>
-```
-
-### Step 3: Add the `epiceditor.js` file
-
-```html
-<script src="epiceditor.min.js"></script>
-```
-
-### Step 4: Init EpicEditor
-
-```javascript
-var editor = new EpicEditor().load();
-```
-
-## API
-
-### EpicEditor([_options_])
-
-The `EpicEditor` constructor creates a new editor instance. Customize the instance by passing the `options` parameter. The example below uses all options and their defaults:
-
-```javascript
-var opts = {
-  container: 'epiceditor',
-  textarea: null,
-  basePath: 'epiceditor',
-  clientSideStorage: true,
-  localStorageName: 'epiceditor',
-  useNativeFullscreen: true,
-  parser: marked,
-  file: {
-    name: 'epiceditor',
-    defaultContent: '',
-    autoSave: 100
-  },
-  theme: {
-    base: '/themes/base/epiceditor.css',
-    preview: '/themes/preview/preview-dark.css',
-    editor: '/themes/editor/epic-dark.css'
-  },
-  button: {
-    preview: true,
-    fullscreen: true,
-    bar: "auto"
-  },
-  focusOnLoad: false,
-  shortcut: {
-    modifier: 18,
-    fullscreen: 70,
-    preview: 80
-  },
-  string: {
-    togglePreview: 'Toggle Preview Mode',
-    toggleEdit: 'Toggle Edit Mode',
-    toggleFullscreen: 'Enter Fullscreen'
-  },
-  autogrow: false
-}
-var editor = new EpicEditor(opts);
-```
-
-### Options
-<table cellspacing="0">
-  <tr>
-    <th>Option</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><code>container</code></td>
-    <td>The ID (string) or element (object) of the target container in which you want the editor to appear.</td>
-    <td><code>epiceditor</code></td>
-  </tr>
-  <tr>
-    <td><code>textarea</code></td>
-    <td>The ID (string) or element (object) of a textarea you would like to sync the editor's content with. On page load if there is content in the textarea, the editor will use that as it's content.</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><code>basePath</code></td>
-    <td>The base path of the directory containing the <code>/themes</code>.</td>
-    <td><code>epiceditor</code></td>
-  </tr>
-  <tr>
-    <td><code>clientSideStorage</code></td>
-    <td>Setting this to false will disable localStorage.</td>
-    <td><code>true</code></td>
-  </tr>
-  <tr>
-    <td><code>localStorageName</code></td>
-    <td>The name to use for the localStorage object.</td>
-    <td><code>epiceditor</code></td>
-  </tr>
-  <tr>
-    <td><code>useNativeFullscreen</code></td>
-    <td>Set to false to always use faux fullscreen (the same as what is used for unsupported browsers).</td>
-    <td><code>true</code></td>
-  </tr>
-  <tr>
-    <td><code>parser</code></td>
-    <td>[Marked](https://github.com/chjj/marked) is the only parser built into EpicEditor, but you can customize or toggle this by passing a parsing function to this option. For example:<br><code>parser: MyCustomParser.parse</code></td>
-    <td><code>marked</code></td>
-  </tr>
-  <tr>
-    <td><code>focusOnLoad</code></td>
-    <td>If <code>true</code>, editor will focus on load.</td>
-    <td><code>false</code></td>
-  </tr>
-  <tr>
-    <td><code>file.name</code></td>
-    <td>If no file exists with this name a new one will be made, otherwise the existing will be opened.</td>
-    <td>container ID</td>
-  </tr>
-  <tr>
-    <td><code>file.defaultContent</code></td>
-    <td>The content to show if no content exists for a file. NOTE: if the <code>textarea</code> option is used, the textarea's value will take precedence over <code>defaultContent</code>.</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><code>file.autoSave</code></td>
-    <td>How often to auto save the file in milliseconds. Set to <code>false</code> to turn it off.</td>
-    <td><code>100</code></td>
-  </tr>
-  <tr>
-    <td><code>theme.base</code></td>
-    <td>The base styles such as the utility bar with the buttons.</td>
-    <td><code>themes/base/epiceditor.css</code></td>
-  </tr>
-  <tr>
-    <td><code>theme.editor</code></td>
-    <td>The theme for the editor which is the area you type into.</td>
-    <td><code>themes/editor/epic-dark.css</code></td>
-  </tr>
-  <tr>
-    <td><code>theme.preview</code></td>
-    <td>The theme for the previewer.</td>
-    <td><code>themes/preview/github.css</code></td>
-  </tr>
-  <tr>
-    <td><code>button</code></td>
-    <td>If set to <code>false</code> will remove all buttons.</td>
-    <td>All buttons set to <code>true</code>.</td>
-  </tr>
-  <tr>
-    <td><code>button.preview</code></td>
-    <td>If set to <code>false</code> will remove the preview button.</td>
-    <td><code>true</code></td>
-  </tr>
-  <tr>
-    <td><code>button.fullscreen</code></td>
-    <td>If set to <code>false</code> will remove the fullscreen button.</td>
-    <td><code>true</code></td>
-  </tr>
-  <tr>
-    <td><code>button.bar</code></td>
-    <td>If <code>true</code> or <code>"show"</code>, any defined buttons will always be visible. If <code>false</code> or <code>"hide"</code>, any defined buttons will never be visible. If <code>"auto"</code>, buttons will usually be hidden, but shown if whenever the mouse is moved.</td>
-    <td><code>"auto"</code></td>
-  </tr>
-  <tr>
-    <td><code>shortcut.modifier</code></td>
-    <td>The key to hold while holding the other shortcut keys to trigger a key combo.</td>
-    <td><code>18</code> (<code>alt</code> key)</td>
-  </tr>
-  <tr>
-    <td><code>shortcut.fullscreen</code></td>
-    <td>The shortcut to open fullscreen.</td>
-    <td><code>70</code> (<code>f</code> key)</td>
-  </tr>
-  <tr>
-    <td><code>shortcut.preview</code></td>
-    <td>The shortcut to toggle the previewer.</td>
-    <td><code>80</code> (<code>p</code> key)</td>
-  </tr>
-  <tr>
-    <td><code>string.togglePreview</code></td>
-    <td>The tooltip text that appears when hovering the preview icon.</td>
-    <td><code>Toggle Preview Mode</code></td>
-  </tr>
-  <tr>
-    <td><code>string.toggleEdit</code></td>
-    <td>The tooltip text that appears when hovering the edit icon.</td>
-    <td><code>Toggle Edit Mode</code></td>
-  </tr>
-  <tr>
-    <td><code>string.toggleFullscreen</code></td>
-    <td>The tooltip text that appears when hovering the fullscreen icon.</td>
-    <td><code>Enter Fullscreen</code></td>
-  </tr>
-  <tr>
-    <td><code>autogrow</code></td>
-    <td>Whether to autogrow EpicEditor to fit its contents. If autogrow is desired one can either specify <code>true</code>, meaning to use default autogrow settings, or an object to define custom settings</td>
-    <td><code>false</code></td>
-  </tr>
-  <tr>
-    <td><code>autogrow.minHeight</code></td>
-    <td>The minimum height (in pixels) that the editor should ever shrink to. This may also take a function that returns the desired minHeight if this is not a constant, or a falsey value if no minimum is desired</td>
-    <td><code>80</code></td>
-  </tr>
-  <tr>
-    <td><code>autogrow.maxHeight</code></td>
-    <td>The maximum height (in pixels) that the editor should ever grow to. This may also take a function that returns the desired maxHeight if this is not a constant, or a falsey value if no maximum is desired</td>
-    <td><code>false</code></td>
-  </tr>
-  <tr>
-    <td><code>autogrow.scroll</code></td>
-    <td>Whether the page should scroll to keep the caret in the same vertical place while autogrowing (recommended for mobile in particular)</td>
-    <td><code>true</code></td>
-  </tr>
-</table>
-
-### load([_callback_])
-
-Loads the editor by inserting it into the DOM by creating an `iframe`. Will trigger the `load` event, or you can provide a callback.
-
-```javascript
-editor.load(function () {
-  console.log("Editor loaded.")
-});
-```
-
-### unload([_callback_])
-
-Unloads the editor by removing the `iframe`. Keeps any options and file contents so you can easily call `.load()` again. Will trigger the `unload` event, or you can provide a callback.
-
-```javascript
-editor.unload(function () {
-  console.log("Editor unloaded.")
-});
-```
-
-### getElement(_element_)
-
-Grabs an editor element for easy DOM manipulation. See the Themes section below for more on the layout of EpicEditor elements.
-
-* `container`: The element given at setup in the options.
-* `wrapper`: The wrapping `<div>` containing the 2 editor and previewer iframes.
-* `wrapperIframe`: The iframe containing the `wrapper` element.
-* `editor`: The #document of the editor iframe (i.e. you could do `editor.getElement('editor').body`).
-* `editorIframe`: The iframe containing the `editor` element.
-* `previewer`: The #document of the previewer iframe (i.e. you could do `editor.getElement('previewer').body`).
-* `previewerIframe`: The iframe containing the `previewer` element.
-
-```javascript
-someBtn.onclick = function () {
-  console.log(editor.getElement('editor').body.innerHTML); // Returns the editor's content
-}
-```
-
-### is(_state_)
-
-Returns a boolean for the requested state. Useful when you need to know if the editor is loaded yet for example. Below is a list of supported states:
-
-* `loaded`
-* `unloaded`
-* `edit`
-* `preview`
-* `fullscreen`
-
-```javascript
-fullscreenBtn.onclick = function () {
-  if (!editor.is('loaded')) { return; }
-  editor.enterFullscreen();
-}
-```
-
-### open(_filename_)
-
-Opens a client side storage file into the editor.
-
-**Note:** This does _not_ open files on your server or machine (yet). This simply looks in localStorage where EpicEditor stores drafts.
-
-```javascript
-openFileBtn.onclick = function () {
-  editor.open('some-file'); // Opens a file when the user clicks this button
-}
-```
-
-### importFile([_filename_],[_content_])
-
-Imports a string of content into a client side storage file. If the file already exists, it will be overwritten. Useful if you want to inject a bunch of content via AJAX. Will also run `.open()` after import automatically.
-
-**Note:** This does _not_ import files on your server or machine (yet). This simply looks in localStorage where EpicEditor stores drafts.
-
-```javascript
-importFileBtn.onclick = function () {
-  editor.importFile('some-file',"#Imported markdown\nFancy, huh?"); //Imports a file when the user clicks this button
-}
-```
-
-### exportFile([_filename_],[_type_])
-
-Returns the plain text of the client side storage file, or if given a `type`, will return the content in the specified type. If you leave both parameters `null` it will return the current document's content in plain text. The supported export file types are:
-
-**Note:** This does _not_ export files to your server or machine (yet). This simply looks in localStorage where EpicEditor stores drafts.
-
-* text (default)
-* html
-* json (includes metadata)
-* raw (warning: this is browser specific!)
-
-```javascript
-syncWithServerBtn.onclick = function () {
-  var theContent = editor.exportFile();
-  saveToServerAjaxCall('/save', {data:theContent}, function () {
-    console.log('Data was saved to the database.');
-  });
-}
-```
-
-### rename(_oldName_, _newName_)
-
-Renames a client side storage file.
-
-**Note:** This does _not_ rename files on your server or machine (yet). This simply looks in localStorage where EpicEditor stores drafts.
-
-```javascript
-renameFileBtn.onclick = function () {
-  var newName = prompt('What do you want to rename this file to?');
-  editor.rename('old-filename.md', newName); //Prompts a user and renames a file on button click
-}
-```
-
-### save()
-
-Manually saves a file to client side storage (localStorage by default). EpicEditor will save continuously every 100ms by default, but if you set `autoSave` in the options to `false` or to longer intervals it's useful to manually save.
-
-**Note:** This does _not_ save files to your server or machine (yet). This simply looks in localStorage where EpicEditor stores drafts.
-
-```javascript
-saveFileBtn.onclick = function () {
-  editor.save();
-}
-```
-
-### remove(_name_)
-
-Deletes a client side storage file.
-
-**Note:** This does _not_ remove files from your server or machine (yet). This simply looks in localStorage where EpicEditor stores drafts.
-
-```javascript
-removeFileBtn.onclick = function () {
-  editor.remove('example.md');
-}
-```
-
-### getFiles([_name_], [_excludeContent_])
-
-If no `name` is given it returns an object containing the names and metadata of all client side storage file objects. If a `name` is specified it will return just the metadata of that single file object. If `excludeContent` is true, it will remove the content from the returned object. This is useful when you just want a list of files or get some meta data. If `excludeContent` is false (default), it'll return a `content` property per file in plain text format.
-
-**Note:** This does _not_ get files from your server or machine (yet). This simply looks in localStorage where EpicEditor stores drafts.
-
-```javascript
-var files = editor.getFiles();
-for (x in files) {
-  console.log('File: ' + x); //Returns the name of each file
-};
-```
-
-### on(_event_, _handler_)
-
-Sets up an event handler (callback) for a specified event. For all event types, see the Events section below.
-
-```javascript
-editor.on('unload', function () {
-  console.log('Editor was removed');
-});
-```
-
-### emit(_event_)
-
-Fires an event programatically. Similar to jQuery's `.trigger()`
-
-```javascript
-editor.emit('unload'); // Triggers the handler provided in the "on" method above
-```
-
-### removeListener(_event_, [_handler_])
-
-Allows you to remove all listeners for an event, or just the specified one.
-
-```javascript
-editor.removeListener('unload'); //The handler above would no longer fire
-```
-
-### preview()
-
-Puts the editor into preview mode.
-
-```javascript
-previewBtn.onclick = function () {
-  editor.preview();
-}
-```
-
-### edit()
-
-Puts the editor into edit mode.
-
-```javascript
-editBtn.onclick = function () {
-  editor.edit();
-}
-```
-
-### focus()
-
-Puts focus on the editor or previewer (whichever is visible). Works just like
-doing plain old JavaScript and input focus like `someInput.focus()`. The
-benefit of using this method however, is that it handles cross browser issues
-and also will focus on the visible view (edit or preview).
-
-```
-showEditorBtn.onclick = function () {
-  editorWrapper.style.display = 'block'; // switch from being hidden from the user
-  editor.focus(); // Focus and allow user to start editing right away
-}
-```
-
-### enterFullscreen()
-
-Puts the editor into fullscreen mode.
-
-**Note:** due to browser security restrictions, calling `enterFullscreen` programmatically
-like this will not trigger native fullscreen. Native fullscreen can only be triggered by a user interaction like mousedown or keyup.
-
-```javascript
-enterFullscreenBtn.onclick = function () {
-  editor.enterFullscreen();
-}
-```
-### exitFullscreen()
-
-Closes fullscreen mode.
-
-```javascript
-exitFullscreenBtn.onclick = function () {
-  editor.exitFullscreen();
-}
-```
-
-### reflow([type], [callback])
-
-`reflow()` allows you to "reflow" the editor in it's container. For example, let's say you increased
-the height of your wrapping element and want the editor to resize too. You could call `reflow`
-and the editor will resize to fit. You can pass it one of two strings as the first parameter to
-constrain the reflow to either `width` or `height`.
-
-It also provides you with a callback parameter if you'd like to do something after the resize is finished.
-The callback will return the new width and/or height in an object. Additionally, you can also listen for
-the `reflow` event. This will also give you back the new size.
-
-**Note:** If you call `reflow()` or `reflow('width')` and you have a fluid width container
-EpicEditor will no longer be fluid because doing a reflow on the width sets an inline style on the editor.
-
-```javascript
-// For an editor that takes up the whole browser window:
-window.onresize = function () {
-  editor.reflow();
-}
-
-// Constrain the reflow to just height:
-someDiv.resizeHeightHandle = function () {
-  editor.reflow('height');
-}
-
-// Same as the first example, but this has a callback
-window.onresize = function () {
-  editor.reflow(function (data) {
-    console.log('width: ', data.width, ' ', 'height: ', data.height);
-  });
-}
-```
-
-## Events
-
-You can hook into specific events in EpicEditor with <a href="#onevent-handler"><code>on()</code></a> such as when a file is
-created, removed, or updated. Below is a complete list of currently supported events and their description.
-
-<table cellspacing="0" class="event-table">
-  <tr>
-    <th>Event Name</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td><code>create</code></td>
-    <td>Fires whenever a new file is created.</td>
-  </tr>
-  <tr>
-    <td><code>read</code></td>
-    <td>Fires whenever a file is read.</td>
-  </tr>
-  <tr>
-    <td><code>update</code></td>
-    <td>Fires whenever a file is updated.</td>
-  </tr>
-  <tr>
-    <td><code>remove</code></td>
-    <td>Fires whenever a file is deleted.</td>
-  </tr>
-  <tr>
-    <td><code>load</code></td>
-    <td>Fires when the editor loads via <code>load()</code>.</td>
-  </tr>
-  <tr>
-    <td><code>unload</code></td>
-    <td>Fires whenever the editor is unloaded via <code>unload()</code></td>
-  </tr>
-  <tr>
-    <td><code>preview</code></td>
-    <td>Fires whenever the previewer is opened (excluding fullscreen) via <code>preview()</code> or the preview button.</td>
-  </tr>
-  <tr>
-    <td><code>edit</code></td>
-    <td>Fires whenever the editor is opened (excluding fullscreen) via <code>edit()</code> or the edit button.</td>
-  </tr>
-  <tr>
-    <td><code>fullscreenenter</code></td>
-    <td>Fires whenever the editor opens in fullscreen via <code>fullscreen()</code> or the fullscreen button.</td>
-  </tr>
-  <tr>
-    <td><code>fullscreenexit</code></td>
-    <td>Fires whenever the editor closes in fullscreen via <code>fullscreen()</code> or the fullscreen button.</td>
-  </tr>
-  <tr>
-    <td><code>save</code></td>
-    <td>Fires whenever <code>save()</code> is called manually, or implicitly by ```importFile``` or ```open```.</td>
-  </tr>
-  <tr>
-    <td><code>autosave</code></td>
-    <td>Fires whenever the autoSave interval fires, and the file contents have been updated since the last save.</td>
-  </tr>
-  <tr>
-    <td><code>open</code></td>
-    <td>Fires whenever a file is opened or loads automatically by EpicEditor or when <code>open()</code> is called.</td>
-  </tr>
-  <tr>
-    <td><code>reflow</code></td>
-    <td>Fires whenever <code>reflow()</code> is called. Will return the new dimensions in the callback. Will also fire every time there is a resize from autogrow.</td>
-  </tr>
-</table>
-
-## Themes
-
-Theming is easy in EpicEditor. There are three different `<iframe>`s which means styles wont leak between the "chrome" of
-EpicEditor, previewer, or editor. Each one is like it's own web page. In the `themes` directory  you'll see `base`, `preview`,  and
-`editor`. The base styles are for the "chrome" of the editor which contains elements such as the utility bar containing the icons.
-The editor is the styles for the contents of editor `<iframe>` and the preview styles are applied to the preview `<iframe>`.
-
-The HTML of a generated editor (excluding contents) looks like this:
-
-```html
-<div id="container">
-  <iframe id="epiceditor-instance-id">
-    <html>
-      <head>
-        <link type="text/css" id="" rel="stylesheet" href="epiceditor/themes/base/epiceditor.css" media="screen">
-      </head>
-      <body>
-        <div id="epiceditor-wrapper">
-          <iframe id="epiceditor-editor-frame">
-            <html>
-              <head>
-                <link type="text/css" rel="stylesheet" href="epiceditor/themes/editor/epic-dark.css" media="screen">
-              </head>
-              <body contenteditable="true">
-                <!-- raw content -->
-              </body>
-            </html>
-          </iframe>
-          <iframe id="epiceditor-previewer-frame">
-            <html>
-              <head>
-                <link type="text/css" rel="stylesheet" href="epiceditor/themes/preview/github.css" media="screen">
-              </head>
-              <body>
-                <div id="epiceditor-preview">
-                  <!-- rendered html -->
-                </div>
-              </body>
-            </html>
-          </iframe>
-          <div id="epiceditor-utilbar">
-            <span title="Toggle Preview Mode" class="epiceditor-toggle-btn epiceditor-toggle-preview-btn"></span>
-            <span title="Enter Fullscreen" class="epiceditor-fullscreen-btn"></span>
-          </div>
-        </div>
-      </body>
-    </html>
-  </iframe>
+<link rel="stylesheet" href="editor.md/css/editormd.min.css" />
+<div id="editor">
+    <!-- Tips: Editor.md can auto append a `<textarea>` tag -->
+    <textarea style="display:none;">### Hello Editor.md !</textarea>
 </div>
+<script src="jquery.min.js"></script>
+<script src="editor.md/editormd.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        var editor = editormd("editor", {
+            // width: "100%",
+            // height: "100%",
+            // markdown: "xxxx",     // dynamic set Markdown text
+            path : "editor.md/lib/"  // Autoload modules mode, codemirror, marked... dependents libs path
+        });
+    });
+</script>
 ```
 
-## Custom Parsers
+If you using modular script loader:
 
-EpicEditor is set up to allow you to use _any_ parser that accepts and returns a string. This means you can use any flavor of Markdown, process Textile, or even create a simple HTML editor/previewer (`parser: false`). The possibilities are endless. Just make the parser available and pass its parsing function to the EpicEditor setting and you should be all set.
+- [Using Require.js](https://github.com/pandao/editor.md/tree/master/examples/use-requirejs.html)
+- [Using Sea.js](https://github.com/pandao/editor.md/tree/master/examples/use-seajs.html)
 
-For even more customization/optimization you can replace the default built-in processor on build. Running `jake build parser=path/to/parser.js` will override the default Marked build and replace it with your custom script.
+##### Markdown to HTML
 
-See the [custom parsers wiki page](https://github.com/OscarGodson/EpicEditor/wiki/Using-A-Custom-Parser) for more.
+```html
+<link rel="stylesheet" href="editormd/css/editormd.preview.css" />
+<div id="test-markdown-view">
+    <!-- Server-side output Markdown text -->
+    <textarea style="display:none;">### Hello world!</textarea>             
+</div>
+<script src="jquery.min.js"></script>
+<script src="editormd/editormd.js"></script>
+<script src="editormd/lib/marked.min.js"></script>
+<script src="editormd/lib/prettify.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+	    var testView = editormd.markdownToHTML("test-markdown-view", {
+            // markdown : "[TOC]\n### Hello world!\n## Heading 2", // Also, you can dynamic set Markdown text
+            // htmlDecode : true,  // Enable / disable HTML tag encode.
+            // htmlDecode : "style,script,iframe",  // Note: If enabled, you should filter some dangerous HTML tags for website security.
+        });
+    });
+</script>    
+```
 
-## Support
+> See the full example: [http://editor.md.ipandao.com/examples/html-preview-markdown-to-html.html](http://editor.md.ipandao.com/examples/html-preview-markdown-to-html.html)
 
-If you're having any problems with EpicEditor feel free to open a [new ticket](http://github.com/OscarGodson/EpicEditor/issues/new). Go ahead and ask us anything and we'll try to help however we can. If you need a little more help with implementing EpicEditor on your site we've teamed up with [CodersClan](http://codersclan.net) to offer support:
+##### HTML to Markdown?
 
-<a href="http://codersclan.net/support/step1.php?repo_id=2"><img src="http://www.codersclan.net/graphics/getSupport_blue_big.png" width="160"></a>
+Sorry, Editor.md not support HTML to Markdown parsing, Maybe In the future.
 
-## Contributing
+#### Examples
 
-Contributions are greatly encouraged and appreciated. For more on ways to contribute please check the wiki: [Contributing Guide](https://github.com/OscarGodson/EpicEditor/wiki/Contributing).
+[https://pandao.github.io/editor.md/examples/index.html](https://pandao.github.io/editor.md/examples/index.html)
 
-## Credits
+#### Options
 
-EpicEditor relies on [Marked](https://github.com/chjj/marked) to parse markdown and is brought to you in part by [Oscar Godson](http://twitter.com/oscargodson) and [John Donahue](http://twitter.com/johnmdonahue). Special thanks to [Adam Bickford](http://twitter.com/adam_bickford) for the bug fixes and being the QA for pull requests. Lastly, huge thanks to [Sebastian Nitu](http://twitter.com/sebnitu) for the amazing logo and doc styles.
+Editor.md options and default values:
+
+```javascript
+{
+    mode                 : "gfm",          // gfm or markdown
+    name                 : "",             // Form element name for post
+    value                : "",             // value for CodeMirror, if mode not gfm/markdown
+    theme                : "",             // Editor.md self themes, before v1.5.0 is CodeMirror theme, default empty
+    editorTheme          : "default",      // Editor area, this is CodeMirror theme at v1.5.0
+    previewTheme         : "",             // Preview area theme, default empty
+    markdown             : "",             // Markdown source code
+    appendMarkdown       : "",             // if in init textarea value not empty, append markdown to textarea
+    width                : "100%",
+    height               : "100%",
+    path                 : "./lib/",       // Dependents module file directory
+    pluginPath           : "",             // If this empty, default use settings.path + "../plugins/"
+    delay                : 300,            // Delay parse markdown to html, Uint : ms
+    autoLoadModules      : true,           // Automatic load dependent module files
+    watch                : true,
+    placeholder          : "Enjoy Markdown! coding now...",
+    gotoLine             : true,           // Enable / disable goto a line
+    codeFold             : false,
+    autoHeight           : false,
+    autoFocus            : true,           // Enable / disable auto focus editor left input area
+    autoCloseTags        : true,
+    searchReplace        : true,           // Enable / disable (CodeMirror) search and replace function
+    syncScrolling        : true,           // options: true | false | "single", default true
+    readOnly             : false,          // Enable / disable readonly mode
+    tabSize              : 4,
+    indentUnit           : 4,
+    lineNumbers          : true,           // Display editor line numbers
+    lineWrapping         : true,
+    autoCloseBrackets    : true,
+    showTrailingSpace    : true,
+    matchBrackets        : true,
+    indentWithTabs       : true,
+    styleSelectedText    : true,
+    matchWordHighlight   : true,           // options: true, false, "onselected"
+    styleActiveLine      : true,           // Highlight the current line
+    dialogLockScreen     : true,
+    dialogShowMask       : true,
+    dialogDraggable      : true,
+    dialogMaskBgColor    : "#fff",
+    dialogMaskOpacity    : 0.1,
+    fontSize             : "13px",
+    saveHTMLToTextarea   : false,          // If enable, Editor will create a <textarea name="{editor-id}-html-code"> tag save HTML code for form post to server-side.
+    disabledKeyMaps      : [],
+    
+    onload               : function() {},
+    onresize             : function() {},
+    onchange             : function() {},
+    onwatch              : null,
+    onunwatch            : null,
+    onpreviewing         : function() {},
+    onpreviewed          : function() {},
+    onfullscreen         : function() {},
+    onfullscreenExit     : function() {},
+    onscroll             : function() {},
+    onpreviewscroll      : function() {},
+    
+    imageUpload          : false,          // Enable/disable upload
+    imageFormats         : ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+    imageUploadURL       : "",             // Upload url
+    crossDomainUpload    : false,          // Enable/disable Cross-domain upload
+    uploadCallbackURL    : "",             // Cross-domain upload callback url
+
+    toc                  : true,           // Table of contents
+    tocm                 : false,          // Using [TOCM], auto create ToC dropdown menu
+    tocTitle             : "",             // for ToC dropdown menu button
+    tocDropdown          : false,          // Enable/disable Table Of Contents dropdown menu
+    tocContainer         : "",             // Custom Table Of Contents Container Selector
+    tocStartLevel        : 1,              // Said from H1 to create ToC
+    htmlDecode           : false,          // Open the HTML tag identification 
+    pageBreak            : true,           // Enable parse page break [========]
+    atLink               : true,           // for @link
+    emailLink            : true,           // for email address auto link
+    taskList             : false,          // Enable Github Flavored Markdown task lists
+    emoji                : false,          // :emoji: , Support Github emoji, Twitter Emoji (Twemoji);
+                                           // Support FontAwesome icon emoji :fa-xxx: > Using fontAwesome icon web fonts;
+                                           // Support Editor.md logo icon emoji :editormd-logo: :editormd-logo-1x: > 1~8x;
+    tex                  : false,          // TeX(LaTeX), based on KaTeX
+    flowChart            : false,          // flowChart.js only support IE9+
+    sequenceDiagram      : false,          // sequenceDiagram.js only support IE9+
+    previewCodeHighlight : true,           // Enable / disable code highlight of editor preview area
+
+    toolbar              : true,           // show or hide toolbar
+    toolbarAutoFixed     : true,           // on window scroll auto fixed position
+    toolbarIcons         : "full",         // Toolbar icons mode, options: full, simple, mini, See `editormd.toolbarModes` property.
+    toolbarTitles        : {},
+    toolbarHandlers      : {
+        ucwords : function() {
+            return editormd.toolbarHandlers.ucwords;
+        },
+        lowercase : function() {
+            return editormd.toolbarHandlers.lowercase;
+        }
+    },
+    toolbarCustomIcons   : {               // using html tag create toolbar icon, unused default <a> tag.
+        lowercase        : "<a href=\"javascript:;\" title=\"Lowercase\" unselectable=\"on\"><i class=\"fa\" name=\"lowercase\" style=\"font-size:24px;margin-top: -10px;\">a</i></a>",
+        "ucwords"        : "<a href=\"javascript:;\" title=\"ucwords\" unselectable=\"on\"><i class=\"fa\" name=\"ucwords\" style=\"font-size:20px;margin-top: -3px;\">Aa</i></a>"
+    },
+    toolbarIconTexts     : {},
+    
+    lang : {  // Language data, you can custom your language.
+        name        : "zh-cn",
+        description : "开源在线Markdown编辑器<br/>Open source online Markdown editor.",
+        tocTitle    : "目录",
+        toolbar     : {
+            //...
+        },
+        button: {
+            //...
+        },
+        dialog : {
+            //...
+        }
+        //...
+    }
+}
+```
+
+#### Dependents
+
+- [CodeMirror](http://codemirror.net/ "CodeMirror")
+- [marked](https://github.com/markedjs/marked "marked")
+- [jQuery](http://jquery.com/ "jQuery")
+- [FontAwesome](http://fontawesome.io/ "FontAwesome")
+- [github-markdown.css](https://github.com/sindresorhus/github-markdown-css "github-markdown.css")
+- [KaTeX](http://khan.github.io/KaTeX/ "KaTeX")
+- [prettify.js](http://code.google.com/p/google-code-prettify/ "prettify.js")
+- [Rephael.js](http://raphaeljs.com/ "Rephael.js")
+- [flowchart.js](http://adrai.github.io/flowchart.js/ "flowchart.js")
+- [sequence-diagram.js](http://bramp.github.io/js-sequence-diagrams/ "sequence-diagram.js")
+- [Prefixes.scss](https://github.com/pandao/prefixes.scss "Prefixes.scss")
+
+#### Changes
+
+[Change logs](https://github.com/pandao/editor.md/blob/master/CHANGE.md)
+
+#### License
+
+The MIT License.
+
+Copyright (c) 2015-2019 Pandao

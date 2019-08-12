@@ -86,4 +86,4 @@ def sign_in_check(request):
 
 
 def show_article(request, *args):
-    return None
+    return render(request, 'blog/article.html')
