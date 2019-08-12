@@ -83,3 +83,7 @@ def sign_in_check(request):
         response = HttpResponseRedirect(reverse('homepage'))
         set_session(response, user)
         return response
+
+
+def show_article(request, *args):
+    return None
