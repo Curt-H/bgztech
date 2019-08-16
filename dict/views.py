@@ -14,3 +14,12 @@ def dictionary(request):
                   'blog/dict.html',
                   context=context_dict
                   )
+
+
+def add_word(request):
+    context_dict = dict()
+
+    return render(request,
+                  'blog/new_word_form.html',
+                  context=context_dict
+                  )

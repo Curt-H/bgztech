@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="ch">
+<head>
+    <meta charset="UTF-8">
+    <title>BGZ TECH</title>
+</head>
+<body>
+<form action="javascript:alert('OK')" autocomplete="off">
+    <label>
+        单词
+        <input type="text" name="word" required autofocus>
+    </label>
+    <label>
+        词性
+        <input type="text" name="part_of_speech" required>
+    </label>
+    <label>
+        词义
+        <input type="text" name="paraphrase" required>
+    </label>
+    <label>
+        例句
+        <textarea type="text" name="example"></textarea>
+    </label>
+    <button type="button">Submit</button>
+</form>
+</body>
+</html>
