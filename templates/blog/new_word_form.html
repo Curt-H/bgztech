@@ -6,7 +6,8 @@
     <title>BGZ TECH</title>
 </head>
 <body>
-<form action="javascript:alert('OK')" autocomplete="off">
+<form action="{% url "add new word" %}" autocomplete="off" method="post">
+    {% csrf_token %}
     <label>
         单词
         <input type="text" name="word" required autofocus>
@@ -21,9 +22,9 @@
     </label>
     <label>
         例句
-        <textarea type="text" name="example"></textarea>
+        <textarea name="example"></textarea>
     </label>
-    <button type="button">Submit</button>
+    <button type="submit">Submit</button>
 </form>
 </body>
 </html>

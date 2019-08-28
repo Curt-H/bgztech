@@ -8,7 +8,15 @@
 <body>
 <a id="add-new-word" href="{% url "new word form" %}">Add new word</a>
 {% if words %}
-    {{ words }}
+    {% for word in words %}
+    <p>{{ word.word }}</p>
+        {% for p in word.paraphrase %}
+        <p>{{ p.part_of_speech }}</p>
+        <p>{{ p.paraphrase }}</p>
+        <p>{{ p.example }}</p>
+        {% endfor %}
+        <br>
+    {% endfor %}
 {% endif %}
 </body>
 </html>
