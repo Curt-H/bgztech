@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url('', include('blog.urls')),
     url('', include('dict.urls')),
+    url('', include('todolist.urls')),
 ]
