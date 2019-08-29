@@ -6,6 +6,6 @@ from todolist import views
 
 urlpatterns = [
                   path('todo', views.homepage, name='todo homepage'),
-                  path('todo/new', views.show_add_word_form, name='todo new'),
+                  path('todo/new', views.new, name='todo new'),
                   path('todo/edit', views.edit, name='todo edit'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

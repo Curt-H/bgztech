@@ -1,30 +1,31 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 
 
 # Create your views here.
 def homepage(request):
-    return 0
+    return HttpResponse('homepage')
 
 
 def edit(request):
-    return 0
+    return HttpResponse('edit')
 
 
 def edit_get(request):
-    return 0
+    return HttpResponse('edit_get')
 
 
 def edit_post(request):
-    return 0
+    return HttpResponse('edit_post')
 
 
 def new(request):
-    return 0
+    return HttpResponse('new')
 
 
 def new_get(request):
-    return 0
+    return HttpResponse('new_get')
 
 
 def new_post(request):
-    return 0
+    return HttpResponse('new_post')

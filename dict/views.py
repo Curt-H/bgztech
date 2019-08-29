@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from dict.models import Dict, Paraphrase
+from dict.models import Dict, Content
 
 
 # Create your views here.
@@ -33,7 +33,7 @@ def add_new_word(request):
 
     dict_book = Dict()
     dict_book.word = post.get('word')
-    paraphrase = Paraphrase()
+    paraphrase = Content()
     paraphrase.part_of_speech = post.get('part_of_speech')
     paraphrase.paraphrase = post.get('paraphrase')
     paraphrase.example = post.get('example')
