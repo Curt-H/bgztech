@@ -4,7 +4,7 @@ from mongoengine import *
 connect('bgztech')
 
 
-class Paraphrase(EmbeddedDocument):
+class Content(EmbeddedDocument):
     part_of_speech = StringField(required=True)
     paraphrase = StringField(required=True)
     example = StringField()
@@ -12,4 +12,5 @@ class Paraphrase(EmbeddedDocument):
 
 class Dict(Document):
     word = StringField(required=True, unique=True)
-    paraphrase = ListField(EmbeddedDocumentField(Paraphrase))
+    contents = ListField(EmbeddedDocumentField(Content))
+    times = IntField(default=0)
