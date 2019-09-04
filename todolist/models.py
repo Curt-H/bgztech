@@ -3,7 +3,7 @@ from mongoengine import *
 
 # Create your models here.
 
-class Todo(document):
+class Todo(Document):
     title = StringField(required=True)
     content = StringField()
     tag = ListField(StringField)
