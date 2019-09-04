@@ -54,7 +54,8 @@ def create_user(request):
     error_dict = {
         'This password is too short. It must contain at least 6 characters.': '密码少于6位',
         'This password is too common.': '密码太简单',
-        'This password is entirely numeric.': '密码是纯数字'
+        'This password is entirely numeric.': '密码是纯数字',
+        '用户名已被使用': '用户名已被使用',
     }
 
     # get form data from POST

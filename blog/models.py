@@ -1,3 +1,5 @@
+import time
+
 from mongoengine import *
 
 connect('bgztech')
@@ -8,6 +10,7 @@ class Users(Document):
     username = StringField(required=True, unique=True)
     password = StringField(required=True)
     role = StringField(default='user')
+    create_time = IntField(default=time.time())
 
 
 class Session(Document):
