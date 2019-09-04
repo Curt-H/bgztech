@@ -8,7 +8,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.urls import reverse
 
-from blog import validate_username, Users, set_session, current_user, create_user, find_user
+from blog import validate_username, Users, set_session, current_user, create_user, find_user, get_from_cookies
 
 
 def index(request):
@@ -23,7 +23,7 @@ def index(request):
 def homepage(request):
     context_dict = dict()
 
-    session_id = request.COOKIES.get('session_id', None)
+    session_id = get_from_cookies(request, 'session_id')
     u = current_user(session_id)
 
     context_dict['u'] = u

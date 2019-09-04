@@ -108,6 +108,13 @@ def find_user(request):
     return check_password(password, user.password), user
 
 
+def get_from_cookies(request, key_in_cookies):
+    request = request
+    key = key_in_cookies
+
+    return request.COOKIES.get(key, None)
+
+
 if __name__ == '__main__':
     u = Users()
     u.username = '游客'
