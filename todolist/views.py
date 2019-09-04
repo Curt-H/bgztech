@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
 
 # Create your views here.
 from blog import current_user, get_from_cookies
+from utils import log
 
 
 def homepage(request):
@@ -30,13 +31,18 @@ def edit_post(request):
     return HttpResponse('edit_post')
 
 
-def new(request):
-    return HttpResponse('new')
+def new_view(request):
+    context_dict = dict()
+
+    return render(request,
+                  'todolist/new_view.html',
+                  context=context_dict
+                  )
 
 
-def new_get(request):
-    return HttpResponse('new_get')
-
-
-def new_post(request):
-    return HttpResponse('new_post')
+def new_submit(request):
+    log('activate')
+    post = dict(request.POST)
+    for k, v in post.items():
+        log(f'{k} = {v}')
+    return redirect(reverse(new_view))
