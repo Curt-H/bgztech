@@ -66,7 +66,7 @@ def create_user(request):
         validate_username(username)
     except exceptions.ValidationError as error_msg:
         result['success'] = False
-        print(f'e')
+        print(f'{error_msg}')
         result['error_msg'] = [error_dict.get(e, '未知错误')
                                for e in error_msg]
     else:
