@@ -1,10 +1,11 @@
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth.password_validation import validate_password
 from django.core import exceptions
+from django.core.exceptions import ValidationError
 
 from blog.models import Users, Session
+from utils import log
 import uuid
-from django.core.exceptions import ValidationError
 
 
 def validate_username(username):
@@ -34,16 +35,30 @@ def set_session(response, user=None):
     response.set_cookie('session_id', s.session_id, max_age=36000)
 
 
-def current_user(request):
-    session_id = request.COOKIES.get('session_id', None)
-    print(session_id)
+def guest_user():
+    guest = Users()
+    guest.username = '游客'
+    guest.role = 'visitor'
+    guest.id = ''
+    return guest
 
-    # if there is no session or expired return 'visivtor'
+
+def current_user(session_id_from_reqeust):
+    session_id = session_id_from_reqeust
+    log(f'Session id from client is {session_id}')
+
+    # if session is None then return a vistor temp user (not saved in database)
     if session_id is None:
-        print(Users.objects(role='visitor').first())
-        return Users.objects(role='visitor').first()
+        log('No session id get, return GUEST')
+        return guest_user()
+
+    # Query session by session id
+    session = Session.objects(session_id=session_id).first()
+    if session is None:
+        return guest_user()
     else:
-        session = Session.objects(session_id=session_id).first()
+        user = session.user.fetch()
+        log(f'Session found, user is {user.username}')
         return session.user.fetch()
 
 

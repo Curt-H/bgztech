@@ -21,10 +21,12 @@ def index(request):
 
 
 def homepage(request):
-    u = current_user(request)
-    context_dict = {
-        'u': u,
-    }
+    context_dict = dict()
+
+    session_id = request.COOKIES.get('session_id', None)
+    u = current_user(session_id)
+
+    context_dict['u'] = u
     return render(request,
                   'blog/homepage.html',
                   context=context_dict
