@@ -14,18 +14,17 @@ class Todo(Document):
     expired_time = IntField()
     repeat = ListField(IntField)
 
-    def new(self, post: dict):
-        post = post
+    def new(self, data: dict):
+        data = data
 
-        self.title = post.get('title', None)
-        self.content = post.get('content')
-        self.tag = []
+        self.title = data.get('title', None)
+        self.content = data.get('content')
         self.creat_time = time.time()
         self.expired_time = time.time()
-        self.repeat = False
-        self.repeat_mark = post.get('repeat')
+        self.tag = data.get('tag', [])
+        self.repeat = data.get('repeat', [])
         self.save()
-        return self
+        return 0
 
     @staticmethod
     def get_data_from_request(request):
