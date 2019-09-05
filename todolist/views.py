@@ -42,10 +42,9 @@ def new_view(request):
 
 
 def new_submit(request):
-    log('activate')
     todo = Todo()
     data = todo.get_data_from_request(request)
+    log(f'Recieved data {data}')
     todo.new(data)
-    log(f'Recieved data\n{data}')
 
     return redirect(reverse(new_view))

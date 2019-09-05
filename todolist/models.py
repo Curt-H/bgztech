@@ -9,10 +9,10 @@ from utils import log
 class Todo(Document):
     title = StringField(required=True)
     content = StringField()
-    tag = ListField(StringField)
+    tag = ListField()
     creat_time = IntField(required=True)
     expired_time = IntField()
-    repeat = ListField(IntField)
+    repeat = ListField()
 
     def new(self, data: dict):
         data = data
@@ -32,8 +32,8 @@ class Todo(Document):
 
         data = request.POST.dict()
         tag = request.POST.getlist('tag')
-        repeat_mark = request.POST.getlist('repeat')
+        repeat = request.POST.getlist('repeat')
 
         data['tag'] = tag
-        data['repeat_mark'] = repeat_mark
+        data['repeat'] = repeat
         return data
