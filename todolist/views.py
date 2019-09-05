@@ -3,6 +3,7 @@ from django.http import HttpResponse
 
 # Create your views here.
 from blog import current_user, get_from_cookies
+from todolist.models import Todo
 from utils import log
 
 
@@ -42,7 +43,9 @@ def new_view(request):
 
 def new_submit(request):
     log('activate')
-    post = dict(request.POST)
-    for k, v in post.items():
-        log(f'{k} = {v}')
+    todo = Todo()
+    data = todo.get_data_from_request(request)
+    todo.new(data)
+    log(f'Recieved data\n{data}')
+
     return redirect(reverse(new_view))
