@@ -10,17 +10,17 @@ class Todo(Document):
     title = StringField(required=True)
     content = StringField()
     tag = ListField()
-    creat_time = IntField(required=True)
+    create_time = IntField(required=True)
     expired_time = IntField()
     repeat = ListField()
 
     def new(self, data: dict):
         data = data
 
-        self.title = data.get('title', None)
-        self.content = data.get('content')
-        self.creat_time = time.time()
-        self.expired_time = time.time()
+        self.title = data.get('title', 'No title')
+        self.content = data.get('content', 'No Content')
+        self.create_time = data.get('create_time')
+        self.expired_time = data.get('expired_time')
         self.tag = data.get('tag', [])
         self.repeat = data.get('repeat', [])
         self.save()
@@ -30,10 +30,18 @@ class Todo(Document):
     def get_data_from_request(request):
         request = request
 
+        # Get the list element in QueryDict object
         data = request.POST.dict()
         tag = request.POST.getlist('tag')
         repeat = request.POST.getlist('repeat')
 
+        # Change expired time into int from string
+        creat_time = time.time()
+        expired_time = int(request.get('duration')) * 3600 * 24 + creat_time
+
         data['tag'] = tag
         data['repeat'] = repeat
+        data['create_time'] = creat_time
+        data['expired_time'] = expired_time
+
         return data
