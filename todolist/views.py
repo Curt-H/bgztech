@@ -10,10 +10,9 @@ from utils import log
 def homepage(request):
     context_dict = dict()
 
-    session_id = get_from_cookies(request, 'session_id')
-    user = current_user(session_id)
+    todos = Todo.objects.find()
 
-    context_dict['user'] = user
+    context_dict['todos'] = todos
     return render(request,
                   'todolist/homepage.html',
                   context=context_dict
@@ -47,4 +46,4 @@ def new_submit(request):
     log(f'Recieved data {data}')
     todo.new(data)
 
-    return redirect(reverse(new_view))
+    return redirect(reverse(homepage))
