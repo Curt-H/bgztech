@@ -36,12 +36,12 @@ class Todo(Document):
         repeat = request.POST.getlist('repeat')
 
         # Change expired time into int from string
-        creat_time = time.time()
-        expired_time = int(request.get('duration')) * 3600 * 24 + creat_time
+        create_time = time.time()
+        expired_time = int(request.get('duration')) * 3600 * 24 + create_time
 
         data['tag'] = tag
         data['repeat'] = repeat
-        data['create_time'] = creat_time
+        data['create_time'] = create_time
         data['expired_time'] = expired_time
 
         return data
