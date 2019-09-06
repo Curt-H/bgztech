@@ -10,7 +10,7 @@ from utils import log
 def homepage(request):
     context_dict = dict()
 
-    todos = Todo.objects.find()
+    todos = Todo.objects
 
     context_dict['todos'] = todos
     return render(request,

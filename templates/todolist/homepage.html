@@ -6,8 +6,16 @@
 </head>
 <body>
 <h1>TODO LIST</h1>
-<h1>{{ user.username }}</h1>
-<h1>{{ user.role }}</h1>
-<h1>{{ user.create_time }}</h1>
+<hr>
+{% if todos is not None %}
+    {% for todo in todos %}
+        <h2>{{ todo.title }}</h2>
+        <h2>{{ todo.content }}</h2>
+        <h2>{{ todo.create_time }}</h2>
+        <h2>{{ todo.expired_time }}</h2>
+        <h2>{{ todo.repeat }}</h2>
+        <hr>
+    {% endfor %}
+{% endif %}
 </body>
 </html>
