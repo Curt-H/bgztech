@@ -37,7 +37,7 @@ class Todo(Document):
 
         # Change expired time into int from string
         create_time = time.time()
-        expired_time = int(request.get('duration')) * 3600 * 24 + create_time
+        expired_time = float(data.get('duration')) * 3600 * 24 + create_time
 
         data['tag'] = tag
         data['repeat'] = repeat
