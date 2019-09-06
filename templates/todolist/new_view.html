@@ -14,19 +14,15 @@
 <form class="pure-form pure-form-stacked" action="{% url 'todo new post' %}" method="post" autocomplete="off">
     <label>
         title
-        <input class="pure-input-1-2" name="title" type="text">
+        <input class="pure-input-1-2" name="title" type="text" required>
     </label>
     <label>
         content
         <input class="pure-input-1-2" name="content" type="text">
     </label>
     <label>
-        creat_time
-        <input class="pure-input-1-2" name="creat_time" type="datetime-local">
-    </label>
-    <label>
         expired_time
-        <input class="pure-input-1-2" name="expired_time" type="datetime-local">
+        <input class="pure-input-1-2" name="duration" type="number" required>
     </label>
     <label class="pure-checkbox">
         <input name="repeat" type="checkbox" value="1">
