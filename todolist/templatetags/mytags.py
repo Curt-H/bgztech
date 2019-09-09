@@ -9,5 +9,5 @@ register = template.Library()
 def to_date(time_sec):
     t = time_sec
     t_date = time.localtime(t)
-    result = time.strftime("%Y-%m-%d %H:%M:%S", t_date)
+    result = time.strftime("%Y-%m-%d", t_date)
     return result
