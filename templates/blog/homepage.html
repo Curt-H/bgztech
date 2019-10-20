@@ -5,18 +5,22 @@
     <meta charset="UTF-8">
     <title>BGZ TECH</title>
     <link rel="stylesheet" href="{% static "css/homepage.css" %}">
+    <link rel="stylesheet" href="{% static 'css/pure-css/base-min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pure-css/forms-min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pure-css/buttons-core-min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pure-css/buttons-min.css' %}">
 </head>
 <body>
 
 <div class=".article">
 
     {% if u %}
-        <p>欢迎, {{ u.username }}</p>
+        <h1>欢迎, {{ u.username }}</h1>
     {% endif %}
 
-    <img src="{{ MEDIA_URL }}user.png" alt="User media">
-    <a href="{% url "sign up" %}">Sign Up</a>
-    <a href="{% url "sign in" %}">Sign In</a>
+    <a class="pure-button blog-btn" href="{% url "sign up" %}">Sign Up</a>
+    <a class="pure-button blog-btn" href="{% url "sign in" %}">Sign In</a>
+    <a class="pure-button blog-btn" href="{% url "todo homepage" %}">Todo</a>
 </div>
 
 </body>

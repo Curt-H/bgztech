@@ -3,6 +3,8 @@ img {
 }
 
 body {
+    margin: auto 20%;
+    text-align: center;
     background-color: black;
     color: white;
 }
@@ -27,4 +29,8 @@ p {
     background-color: yellow;
     color: red;
     font-weight: 800;
+}
+
+a.blog-btn {
+    width: 8rem;
 }
