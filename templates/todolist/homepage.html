@@ -14,9 +14,10 @@
 {% if todos is not None %}
     {% for todo in todos %}
         <a href="{% url 'todo content' todo.uuid %}">
-            <h2>TITLE: {{ todo.title }}</h2>
-            <h2>TITLE: {{ todo.uuid }}</h2>
+            <h2>任务: {{ todo.title }}</h2>
         </a>
+        <p>任务ID: {{ todo.uuid }}</p>
+
         <hr>
     {% endfor %}
 {% endif %}

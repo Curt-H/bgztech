@@ -12,6 +12,7 @@ class Todo(Document):
     tag = ListField()
     create_time = IntField(required=True)
     expired_time = IntField()
+    finish = BooleanField(default=False)
     repeat = ListField()
     uuid = StringField()
 
