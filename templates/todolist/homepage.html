@@ -11,11 +11,10 @@
 <hr>
 {% if todos is not None %}
     {% for todo in todos %}
-        <h2>TITLE: {{ todo.title }}</h2>
-        <h2>CONTENT: {{ todo.content }}</h2>
-        <h2>CREATE TIME: {% to_date todo.create_time %}</h2>
-        <h2>EXPIRED TIME: {% to_date todo.expired_time %}</h2>
-        <h2>REPEAT: {{ todo.repeat }}</h2>
+        <a href="{% url 'todo content' todo.id %}">
+            <h2>TITLE: {{ todo.title }}</h2>
+            <h2>TITLE: {{ todo.id }}</h2>
+        </a>
         <hr>
     {% endfor %}
 {% endif %}

@@ -13,6 +13,7 @@ class Todo(Document):
     create_time = IntField(required=True)
     expired_time = IntField()
     repeat = ListField()
+    uuid = UUIDField()
 
     def new(self, data: dict):
         data = data

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/pure-css/base-min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pure-css/forms-min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pure-css/buttons-core-min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pure-css/buttons-min.css' %}">
+</head>
+<body>
+{% todo_id %}
+{% csrf_token %}
+</body>
+</html>
