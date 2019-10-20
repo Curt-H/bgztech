@@ -10,10 +10,13 @@
     <link rel="stylesheet" href="{% static 'css/pure-css/buttons-min.css' %}">
 </head>
 <body>
-<h1>{{ todo.id }}</h1>
-<h1>{{ todo.uuid }}</h1>
-<h1>{{ todo.title }}</h1>
-<h1>{{ todo.content }}</h1>
+<h1>任务简报</h1>
+<h2>{{ todo.uuid }}</h2>
+<hr>
+<h2>Title:</h2>
+<p>{{ todo.title }}</p>
+<h2>Content:</h2>
+<p>{{ todo.content }}</p>
 {% csrf_token %}
 </body>
 </html>
