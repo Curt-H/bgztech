@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'css/pure-css/forms-min.css' %}">
     <link rel="stylesheet" href="{% static 'css/pure-css/buttons-core-min.css' %}">
     <link rel="stylesheet" href="{% static 'css/pure-css/buttons-min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/todo.css' %}">
 </head>
 <body>
 <h1>CREATE TODO LIST</h1>
@@ -18,7 +19,7 @@
     </label>
     <label>
         content
-        <input class="pure-input-1-2" name="content" type="text">
+        <textarea class="pure-input-1-2 todo-content" name="content" ></textarea>
     </label>
     <label>
         expired_time
