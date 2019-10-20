@@ -5,22 +5,26 @@
     <meta charset="UTF-8">
     <title>BGZ TECH</title>
     <link rel="stylesheet" href="{% static "css/homepage.css" %}">
+    <link rel="stylesheet" href="{% static 'css/pure-css/base-min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pure-css/forms-min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pure-css/buttons-core-min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pure-css/buttons-min.css' %}">
 </head>
 <body>
 
 
 <div class="main">
 
-    <form action="{% url "register" %}" method="post">
+    <form class="pure-form" action="{% url "register" %}" method="post" autocomplete="off">
         <label>
             账号
-            <input type="text" name="username" required>
+            <input class="user" type="text" name="username" required>
         </label>
         <label>
             密码
-            <input type="password" name="password" maxlength="20" required>
+            <input class="user" type="password" name="password" maxlength="20" required>
         </label>
-        <button type="submit">SUBMIT</button>
+        <button class="pure-button pure-button-primary" type="submit">SUBMIT</button>
         {% csrf_token %}
     </form>
 
