@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'dict',
+    'gunicorn',
     'todolist'
 ]
 
@@ -122,6 +123,7 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "collected_static/")
 MEDIA_URL = '/media/'
 
 # password hashes
