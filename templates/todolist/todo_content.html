@@ -17,6 +17,7 @@
 <p>{{ todo.title }}</p>
 <h2>Content:</h2>
 <p>{{ todo.content }}</p>
+<a href="{% url 'todo delete' todo.uuid %}">DELETE</a>
 {% csrf_token %}
 </body>
 </html>

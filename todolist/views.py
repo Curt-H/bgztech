@@ -59,3 +59,13 @@ def todo_content(request, todo_id):
                   'todolist/todo_content.html',
                   context=context_dict
                   )
+
+
+def todo_delete(request, todo_id):
+    context_dict = dict()
+    todo_uuid = str(todo_id)
+    todo = Todo.objects(uuid=todo_uuid).first()
+    log(f'开始执行删除, 被删除任务ID:{todo.id}')
+    todo.delete()
+
+    return redirect(reverse(homepage))
