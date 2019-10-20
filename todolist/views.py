@@ -54,7 +54,6 @@ def new_submit(request):
 
 def todo_content(request, todo_id):
     context_dict = dict()
-    context_dict.todo_id = todo_id
 
     return render(request,
                   'todolist/new_view.html',
