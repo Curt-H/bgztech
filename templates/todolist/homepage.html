@@ -13,12 +13,18 @@
 <hr>
 {% if todos is not None %}
     {% for todo in todos %}
-        <a href="{% url 'todo content' todo.uuid %}">
-            <h2>任务: {{ todo.title }}</h2>
-        </a>
-        <p>任务ID: {{ todo.uuid }}</p>
-
-        <hr>
+        {% if not todo.finish %}
+            <a href="{% url 'todo content' todo.uuid %}">
+                <h2>任务: {{ todo.title }}</h2>
+            </a>
+            <p>任务ID: {{ todo.uuid }}</p>
+            <hr>
+        {% else %}
+            <a href="{% url 'todo content' todo.uuid %}">
+                <p>任务: {{ todo.title }}</p>
+            </a>
+            <hr>
+        {% endif %}
     {% endfor %}
 {% endif %}
 </body>

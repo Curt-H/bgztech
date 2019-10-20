@@ -12,4 +12,5 @@ urlpatterns = [
                   path('todo/edit', views.edit, name='todo edit'),
                   path('todo/<uuid:todo_id>', views.todo_content, name='todo content'),
                   path('todo/<uuid:todo_id>/delete', views.todo_delete, name='todo delete'),
+                  path('todo/<uuid:todo_id>/finish', views.todo_finish, name='todo finish'),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -69,3 +69,18 @@ def todo_delete(request, todo_id):
     todo.delete()
 
     return redirect(reverse(homepage))
+
+
+def todo_finish(request, todo_id):
+    context_dict = dict()
+    todo_uuid = str(todo_id)
+    todo = Todo.objects(uuid=todo_uuid).first()
+
+    log(f'开始递交任务完成回执, 任务ID:{todo.id}')
+
+    todo.finish = True
+    todo.save()
+
+    log(f'任务完成回执递交完成, 任务ID:{todo.id}')
+
+    return redirect(reverse(homepage))
