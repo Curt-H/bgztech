@@ -4,7 +4,7 @@ from django.core import exceptions
 from django.core.exceptions import ValidationError
 
 from blog.models import Users, Session
-from utils import log
+from utils.utils import log
 import uuid
 
 

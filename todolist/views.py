@@ -2,9 +2,8 @@ from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
 
 # Create your views here.
-from blog import current_user, get_from_cookies
 from todolist.models import Todo
-from utils import log
+from utils.utils import log
 
 
 def homepage(request):

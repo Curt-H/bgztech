@@ -3,7 +3,7 @@ import time
 from mongoengine import *
 
 # Create your models here.
-from utils import log
+from utils import gen_uuid
 
 
 class Todo(Document):
@@ -24,6 +24,7 @@ class Todo(Document):
         self.expired_time = data.get('expired_time')
         self.tag = data.get('tag', [])
         self.repeat = data.get('repeat', [])
+        self.uuid = gen_uuid()
         self.save()
         return 0
 
