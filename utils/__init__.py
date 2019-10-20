@@ -5,6 +5,6 @@ from utils.utils import log
 
 def gen_uuid():
     # namespace = uuid.NAMESPACE_DNS
-    uuid_str = uuid.uuid1().hex
+    uuid_str = uuid.uuid1()
     log(uuid_str)
-    return uuid_str
+    return str(uuid_str)

@@ -11,10 +11,6 @@ def homepage(request):
 
     todos = Todo.objects
 
-    for i in range(len(todos)):
-        todos[i].id = str(todos[i].id)
-        print(todos[i].id)
-        print(type(todos[i].id))
     context_dict['todos'] = todos
     return render(request,
                   'todolist/homepage.html',
@@ -54,8 +50,12 @@ def new_submit(request):
 
 def todo_content(request, todo_id):
     context_dict = dict()
+    todo_uuid = str(todo_id)
+    todo = Todo.objects(uuid=todo_uuid).first()
+    log(todo)
+    context_dict['todo'] = todo
 
     return render(request,
-                  'todolist/new_view.html',
+                  'todolist/todo_content.html',
                   context=context_dict
                   )

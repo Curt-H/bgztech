@@ -13,7 +13,7 @@ class Todo(Document):
     create_time = IntField(required=True)
     expired_time = IntField()
     repeat = ListField()
-    uuid = UUIDField()
+    uuid = StringField()
 
     def new(self, data: dict):
         data = data
@@ -24,7 +24,7 @@ class Todo(Document):
         self.expired_time = data.get('expired_time')
         self.tag = data.get('tag', [])
         self.repeat = data.get('repeat', [])
-        self.uuid = gen_uuid()
+        self.uuid = str(gen_uuid())
         self.save()
         return 0
 

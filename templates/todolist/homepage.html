@@ -11,7 +11,7 @@
 <hr>
 {% if todos is not None %}
     {% for todo in todos %}
-{#        <a href="{% url 'todo content' todo.id %}">#}
+        <a href="{% url 'todo content' todo.uuid %}">
             <h2>TITLE: {{ todo.title }}</h2>
             <h2>TITLE: {{ todo.uuid }}</h2>
         </a>
