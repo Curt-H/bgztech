@@ -6,3 +6,12 @@ textarea.todo-content {
 body {
     margin: auto 20%;
 }
+
+div.finish {
+    position: absolute;
+    padding: 0 1%;
+    width: 15%;
+    left: 1%;
+    top: 1%;
+    border-style: dotted;
+}

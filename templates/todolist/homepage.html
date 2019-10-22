@@ -4,6 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>Title</title>
     <link rel="stylesheet" href="{% static 'css/todo.css' %}">
 </head>
@@ -11,21 +12,31 @@
 <h1>TODO LIST</h1>
 <a href="{% url 'todo new view' %}">New</a>
 <hr>
-{% if todos is not None %}
-    {% for todo in todos %}
-        {% if not todo.finish %}
-            <a href="{% url 'todo content' todo.uuid %}">
-                <h2>任务: {{ todo.title }}</h2>
-            </a>
-            <p>任务ID: {{ todo.uuid }}</p>
-            <hr>
-        {% else %}
-            <a href="{% url 'todo content' todo.uuid %}">
-                <p>任务: {{ todo.title }}</p>
-            </a>
-            <hr>
-        {% endif %}
-    {% endfor %}
-{% endif %}
+<div class="infinished">
+    {% if todos is not None %}
+        {% for todo in todos %}
+            {% if not todo.finish %}
+                <a href="{% url 'todo content' todo.uuid %}">
+                    <h2>任务: {{ todo.title }}</h2>
+                </a>
+                {% if todo.content %}
+                    <p>{{ todo.content }}</p>
+                {% endif %}
+                <hr>
+            {% endif %}
+        {% endfor %}
+        </div>
+        <div class="finish">
+            <h1>Finished</h1>
+            {% for todo in todos %}
+                {% if todo.finish %}
+                    <a href="{% url 'todo content' todo.uuid %}">
+                        <p>{{ todo.title }}</p>
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+    {% endif %}
 </body>
 </html>
