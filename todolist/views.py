@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
 
 # Create your views here.
+from todolist import bgz_checked
 from todolist.models import Todo
 from utils.utils import log
 
 
+@bgz_checked
 def homepage(request):
     context_dict = dict()
 
@@ -18,18 +20,22 @@ def homepage(request):
                   )
 
 
+@bgz_checked
 def edit(request):
     return HttpResponse('edit')
 
 
+@bgz_checked
 def edit_get(request):
     return HttpResponse('edit_get')
 
 
+@bgz_checked
 def edit_post(request):
     return HttpResponse('edit_post')
 
 
+@bgz_checked
 def new_view(request):
     context_dict = dict()
 
@@ -39,6 +45,7 @@ def new_view(request):
                   )
 
 
+@bgz_checked
 def new_submit(request):
     todo = Todo()
     data = todo.get_data_from_request(request)
@@ -48,6 +55,7 @@ def new_submit(request):
     return redirect(reverse(homepage))
 
 
+@bgz_checked
 def todo_content(request, todo_id):
     context_dict = dict()
     todo_uuid = str(todo_id)
@@ -61,6 +69,7 @@ def todo_content(request, todo_id):
                   )
 
 
+@bgz_checked
 def todo_delete(request, todo_id):
     context_dict = dict()
     todo_uuid = str(todo_id)
@@ -71,6 +80,7 @@ def todo_delete(request, todo_id):
     return redirect(reverse(homepage))
 
 
+@bgz_checked
 def todo_finish(request, todo_id):
     context_dict = dict()
     todo_uuid = str(todo_id)
