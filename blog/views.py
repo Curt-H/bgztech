@@ -89,3 +89,7 @@ def sign_in_check(request):
 
 def show_article(request, *args):
     return render(request, 'blog/article.html')
+
+
+def page_not_found(request, *args):
+    return render(request, 'blog/404.html')
