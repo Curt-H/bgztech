@@ -10,10 +10,20 @@ from utils.utils import log
 @bgz_checked
 def homepage(request):
     context_dict = dict()
+    todos_sorted = dict()
 
     todos = Todo.objects
 
+    for t in todos:
+        if t.finish:
+            pass
+        elif todos_sorted.get(t.title) is None:
+            todos_sorted[t.title] = [t]
+        else:
+            todos_sorted[t.title].append(t)
+
     context_dict['todos'] = todos
+    context_dict['todos_sorted'] = todos_sorted
     return render(request,
                   'todolist/homepage.html',
                   context=context_dict
