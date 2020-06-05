@@ -2,9 +2,6 @@ from flask import Flask, render_template
 from config import app_config
 from utils import log
 
-app = Flask(__name__)
-
-
 def create_app():
     app = Flask(__name__)
 
