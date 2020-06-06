@@ -3,3 +3,29 @@
 <link rel="stylesheet" type="text/css" href={{ url_for( 'static',
     filename='css/index.css' ) }}>
 {% endblock css %}
+{% block content %}
+<img id="logo" src={{ url_for('static', filename='logo-full.png') }}>
+<div class="index-link">
+    <a class="index-link href="{{ url_for('main.articles') }}"><img
+            class="index-link" src="{{
+            url_for('static', filename='articles.png') }}" alt=""></a>
+    <a class="index-link href="{{ url_for('main.activities') }}"><img
+            class="index-link" src="{{
+            url_for('static', filename='activities.png') }}" alt=""></a>
+    <a class="index-link href="{{ url_for('main.lab') }}"><img
+            class="index-link" src="{{
+            url_for('static', filename='lab.png') }}" alt=""></a>
+</div>
+
+<div class="index-link">
+    <a class="index-link href="{{ url_for('main.articles') }}"><img
+            class="index-link" src="{{
+            url_for('static', filename='articles.png') }}" alt=""></a>
+    <a class="index-link href="{{ url_for('main.activities') }}"><img
+            class="index-link" src="{{
+            url_for('static', filename='activities.png') }}" alt=""></a>
+    <a class="index-link href="{{ url_for('main.lab') }}"><img
+            class="index-link" src="{{
+            url_for('static', filename='lab.png') }}" alt=""></a>
+</div>
+{% endblock content %}
