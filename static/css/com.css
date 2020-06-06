@@ -6,7 +6,11 @@ footer {
     width: 100%;
 }
 
-.footer{
+div#content {
+    margin-bottom: 5rem;
+}
+
+.footer {
     color: black;
     font-size: 0.5rem;
 }
