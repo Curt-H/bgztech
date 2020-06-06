@@ -7,14 +7,18 @@
             href="https://unpkg.com/purecss@1.0.0/build/pure-min.css"
             integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w"
             crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='css/com.css') }}>
+        <link rel="stylesheet" type="text/css" href={{ url_for('static',
+            filename='css/com.css') }}>
         {% block css %}
         {% endblock css %}
     </header>
 
     <html>
-        {% block content %}
-        {% endblock content %}
+        <nav></nav>
+        <div id="content">
+            {% block content %}
+            {% endblock content %}
+        </div>
         <footer>
             <p class="footer">放弃幻想, 脚踏实地; 实事求是, 不悔不怨</p>
             <a class="footer" href="http://beian.miit.gov.cn">皖ICP备17018263号</a>
