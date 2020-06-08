@@ -1,0 +1,28 @@
+html {
+    background-color: black;
+}
+
+#navbar {
+    background-color: black;
+    color: white;
+    border-bottom: gray solid;
+    width: 100%;
+}
+
+.navlist {
+    color: white;
+}
+
+.navlist-header {
+    color: white;
+    font-weight: bolder;
+    font-size: 1.5rem;
+}
+
+a:hover {
+    color: black;
+}
+
+a:active {
+    color: black;
+}
