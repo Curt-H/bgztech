@@ -18,7 +18,7 @@ def articles():
 
 @main.route('/activities')
 def activities():
-    return redirect(url_for('.index'))
+    return render_template('activities.html')
 
 @main.route('/lab')
 def lab():
