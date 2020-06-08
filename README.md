@@ -4,11 +4,11 @@ Blog program based on Flask
 
 #Function on plan
 - Index page
-  - [ ] Welcome page
+  - [x] Welcome page
   - [ ] Nav bar
-  - [ ] Footer
-  - [ ] Html template
-  - [ ] CSS(Pure CSS)
+  - [x] Footer
+  - [x] Html template
+  - [x] CSS(Pure CSS)
   - [ ] Java script clock
 - Blog writing page
   - [ ] Markdown editor
