@@ -13,17 +13,17 @@
 
 <html>
 <nav>
-    <div class="pure-menu pure-menu-horizontal">
-        <a href="#" class="pure-menu-heading pure-menu-link">BRAND</a>
+    <div id="navbar" class="pure-menu pure-menu-horizontal">
+        <a href="#" class="pure-menu-heading pure-menu-link navlist-header">BGZ TECH</a>
         <ul class="pure-menu-list">
             <li class="pure-menu-item">
-                <a href="#" class="pure-menu-link">News</a>
+                <a href="{{ url_for('main.articles')}}" class="pure-menu-link navlist">Articles</a>
             </li>
             <li class="pure-menu-item">
-                <a href="#" class="pure-menu-link">Sports</a>
+                <a href="{{ url_for('main.activities')}}" class="pure-menu-link navlist">Activities</a>
             </li>
             <li class="pure-menu-item">
-                <a href="#" class="pure-menu-link">Finance</a>
+                <a href="{{ url_for('main.lab')}}" class="pure-menu-link navlist">Lab</a>
             </li>
         </ul>
     </div>
