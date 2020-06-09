@@ -15,3 +15,9 @@ Blog program based on Flask
   - [ ] File storage for blog file
   - [ ] Database object
   - [ ] Submit function
+- Activities page
+  Activities page is just like weibo, user can write some short message and submit
+  - [ ] use mongoDB to record weibo
+  - [ ] use ajax to make asnyc possible
+  - [ ] finish html page
+  - [ ] finish css file
